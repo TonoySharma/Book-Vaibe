@@ -1,11 +1,16 @@
 
+import { useContext } from 'react';
 import { useLoaderData, useParams } from 'react-router';
+import { BookContext } from '../../context/BookContext';
 
 // const booksPromise = fetch ("/booksData.json")
 // .then(res=>res.json());
 
-
 const BookDetails = () => {
+
+const {handleMarkAsRead,handleWishList} = useContext(BookContext);
+// console.log(handleMarkAsRead,storedBooks, "bookContext");
+
 const {bookId:bookParamsId} = useParams();
 // console.log(bookParamsId, "bookId");
 
@@ -18,10 +23,12 @@ const {bookId:bookParamsId} = useParams();
  const expectedBook = books.find(book => book.bookId == Number(bookParamsId))
 //  console.log(expectedBook, "expectedBook");
 const {bookId,bookName,author,image,review,totalPages,rating,category,tags,publisher,yearOfPublishing} = expectedBook
+
+
     return (
        <div className="grid grid-cols-2 bg-base-100 shadow-sm container mx-auto mt-8 rounded-2xl">
   <div className="bg-gray-100 flex items-center justify-center rounded-2xl p-6">
-  
+  {/* image */}
   <div className="hover-3d">
     
     {/* Main Image */}
@@ -46,6 +53,7 @@ const {bookId,bookName,author,image,review,totalPages,rating,category,tags,publi
   </div>
 
 </div>
+ {/* card title */}
   <div className="card-body space-y-3">
     <h3 className='font-semibold text-2xl'>{bookId}</h3>
     <h2 className="card-title text-3xl font-bold">{bookName}</h2>
@@ -81,9 +89,12 @@ const {bookId,bookName,author,image,review,totalPages,rating,category,tags,publi
             <span className='font-bold'>Rating :</span> <span className='font-medium'>{rating}</span>
         </div>
         </div>
+
+        {/* button */}
     <div className="card-actions gap-5">
-      <button className="btn mt-4">Mark as Read</button>
-      <button className="btn btn-info text-white mt-4">Add to Wishlist</button>
+      <button onClick={()=>handleMarkAsRead(expectedBook)} className="btn mt-4">Mark as Read</button>
+
+      <button onClick={()=>handleWishList(expectedBook)} className="btn btn-info text-white mt-4">Add to Wishlist</button>
     </div>
   </div>
 </div>
