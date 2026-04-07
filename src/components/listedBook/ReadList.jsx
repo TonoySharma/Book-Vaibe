@@ -11,16 +11,16 @@ const [filterReadList,setFilterReadList] = useState(readList)
     useEffect(()=>{
         if(sortingType){
             if(sortingType === 'pages'){
-                const sortedData = [...readList].sort((a,b)=> a.totalPages - b.totalPages);
+                const sortedData = [...readList].sort((a, b)=> a.totalPages - b.totalPages);
 
                 // console.log(sortedData)
                 setFilterReadList(sortedData);
         }else if(sortingType === "rating"){
-             const sortedData = [...readList].sort((a,b)=> a.rating - b.rating);
+             const sortedData = [...readList].sort((a, b)=> a.rating - b.rating);
 
                 // console.log(sortedData)
                 setFilterReadList(sortedData);
-        }
+        };
         }
     }, [sortingType, readList]);
 

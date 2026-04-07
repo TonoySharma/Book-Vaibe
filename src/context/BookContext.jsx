@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { createContext } from 'react';
 import { Slide, toast } from 'react-toastify';
 import { addReadListLocalDB, getAllReadLocalDB } from '../utils/LocalDB';
@@ -8,7 +8,7 @@ export const BookContext = createContext();
 
 const BookProvider = ({ children }) => {
 
-const [readList, setReadList] = useState(()=> getAllReadLocalDB);
+const [readList, setReadList] = useState(()=> getAllReadLocalDB());
 const [wishList, setWishList] = useState([]);
 
 
@@ -27,7 +27,6 @@ const isExistBook =  readList.find(
 if (isExistBook){
   toast.error("The book is already exist",{
     theme: "dark",
-    
     autoClose: 1500,
     transition: Slide,
   });
@@ -59,9 +58,8 @@ const isExistInReadList = readList.find(
  if(isExistInReadList){
     toast.error("This book is already in read list",{
         theme: "dark",
-    
-    autoClose: 1500,
-    transition: Slide,
+        autoClose: 1500,
+        transition: Slide,
     });
     return;
  }
@@ -84,7 +82,6 @@ else{
   setWishList([...wishList, currentBook]);
   toast.success(`${currentBook.bookName} is added to wish list` ,{
      theme: "dark",
-   
     autoClose: 1500,
     transition: Slide,
   })
