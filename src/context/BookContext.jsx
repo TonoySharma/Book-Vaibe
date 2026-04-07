@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import React, { useEffect, useState } from 'react';
 import { createContext } from 'react';
 import { Slide, toast } from 'react-toastify';
+import { addReadListLocalDB, getAllReadLocalDB } from '../utils/LocalDB';
 
 export const BookContext = createContext();
 
 const BookProvider = ({ children }) => {
 
-const [readList, setReadList] = useState([]);
+const [readList, setReadList] = useState(()=> getAllReadLocalDB);
 const [wishList, setWishList] = useState([]);
+
 
 const handleMarkAsRead = (currentBook) =>{
   
@@ -16,7 +19,10 @@ const handleMarkAsRead = (currentBook) =>{
 // step 3:array of object
 // step 4:if the book already exist then show a alert ar toast
 // step 5:if not then add the book in the array or collection
-const isExistBook =  readList.find((book) => book. bookId === currentBook.bookId );
+addReadListLocalDB(currentBook);
+
+const isExistBook =  readList.find(
+  (book) => book. bookId === currentBook.bookId );
 
 if (isExistBook){
   toast.error("The book is already exist",{
