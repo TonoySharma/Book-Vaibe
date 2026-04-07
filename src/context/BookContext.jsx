@@ -4,10 +4,9 @@ import { Slide, toast } from 'react-toastify';
 
 export const BookContext = createContext();
 
-
 const BookProvider = ({ children }) => {
 
-const [storedBooks, setStoredBooks] = useState([]);
+const [readList, setReadList] = useState([]);
 const [wishList, setWishList] = useState([]);
 
 const handleMarkAsRead = (currentBook) =>{
@@ -17,26 +16,26 @@ const handleMarkAsRead = (currentBook) =>{
 // step 3:array of object
 // step 4:if the book already exist then show a alert ar toast
 // step 5:if not then add the book in the array or collection
-const isExistBook = storedBooks.find((book) => book. bookId === currentBook.bookId );
+const isExistBook =  readList.find((book) => book. bookId === currentBook.bookId );
 
 if (isExistBook){
   toast.error("The book is already exist",{
     theme: "dark",
-    position: "top-center",
+    
     autoClose: 1500,
     transition: Slide,
   });
 }
 else{
-  setStoredBooks([...storedBooks, currentBook]);
+  setReadList([... readList, currentBook]);
   toast.success(`${currentBook.bookName} is added to read list` ,{
      theme: "dark",
-    position: "top-center",
+    
     autoClose: 1500,
     transition: Slide,
   })
 }
-console.log(currentBook,storedBooks, "book");
+// console.log(currentBook,storedBooks, "book");
 };
 
 const handleWishList = (currentBook) =>{
@@ -48,11 +47,16 @@ const handleWishList = (currentBook) =>{
 // step 5:if not then add the book in the array or collection
 
 
-const isExistInReadList = storedBooks.find(
+const isExistInReadList = readList.find(
     (book) => book.bookId === currentBook.bookId);
 
  if(isExistInReadList){
-    toast.error("This book is already in read list");
+    toast.error("This book is already in read list",{
+        theme: "dark",
+    
+    autoClose: 1500,
+    transition: Slide,
+    });
     return;
  }
 
@@ -65,7 +69,7 @@ const isExistBook = wishList.find(
 if (isExistBook){
   toast.error("The book is already exist",{
     theme: "dark",
-    position: "top-center",
+    
     autoClose: 1500,
     transition: Slide,
   });
@@ -74,7 +78,7 @@ else{
   setWishList([...wishList, currentBook]);
   toast.success(`${currentBook.bookName} is added to wish list` ,{
      theme: "dark",
-    position: "top-center",
+   
     autoClose: 1500,
     transition: Slide,
   })
@@ -83,8 +87,8 @@ else{
 };
 
     const data = {
-       storedBooks,
-        setStoredBooks,
+       readList,
+        setReadList,
         handleMarkAsRead,
         wishList,
         handleWishList,
