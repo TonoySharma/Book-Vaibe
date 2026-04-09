@@ -16,8 +16,8 @@ console.log(sortingType ,"sortingType");
          <div >
                {/*dropdown  */}
 
-            <div className='flex justify-center my-4' >
-           <div className="dropdown dropdown-start ">
+       <div className='flex justify-center my-4' >
+        <div className="dropdown dropdown-start ">
   <div tabIndex={0} role="button" className="btn m-1">Sort by : {sortingType} ⬇️</div>
   <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
     <li onClick={()=>setSortingType('pages') }><a>Pages</a></li>

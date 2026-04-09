@@ -7,9 +7,12 @@ const BookDetails = () => {
   const { bookId: bookParamsId } = useParams();
   const books = useLoaderData();
 
-  const expectedBook = books.find(book => book.bookId === Number(bookParamsId));
+  const expectedBook = books.find(
+    book => book.bookId === Number(bookParamsId)
+  );
 
-  if (!expectedBook) return <p className="text-center mt-10">Book not found.</p>;
+  if (!expectedBook)
+    return <p className="text-center mt-10">Book not found.</p>;
 
   const {
     bookId,
@@ -26,38 +29,55 @@ const BookDetails = () => {
   } = expectedBook;
 
   return (
-    <div className="container mx-auto mt-8 grid md:grid-cols-2 gap-8 bg-white shadow-lg rounded-2xl overflow-hidden">
+    <div className="max-w-6xl mx-auto mt-10 grid md:grid-cols-2 gap-8 bg-white shadow-md rounded-2xl p-6 my-20 bg-[radial-gradient(ellipse_at_70%_50%,#0f2238_0%,#070f1e_40%,#020508_100%)] ">
+
       {/* Book Image */}
-      <div className="bg-gray-100 flex items-center justify-center p-6 rounded-2xl">
-        <figure className="w-full max-w-sm rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
-          <img
-            src={image}
-            alt={bookName}
-            className="w-full h-[400px] object-cover rounded-2xl"
-          />
-        </figure>
+      <div className="flex items-center justify-center rounded-2xl p-6">
+        <div className="hover-3d">
+  {/* content */}
+  <figure className="w-60 rounded-2xl">
+    <img src={image}alt="Tailwind CSS 3D card" />
+  </figure>
+  {/* 8 empty divs needed for the 3D effect */}
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
       </div>
 
       {/* Book Details */}
-      <div className="p-6 flex flex-col justify-between">
-        <div className="space-y-4">
-          <h3 className="text-green-600 font-semibold text-lg">Book ID: {bookId}</h3>
-          <h2 className="text-3xl font-bold">{bookName}</h2>
-          <p className="text-gray-700 font-medium">By: {author}</p>
-          <p className="border-t border-gray-300 pt-3 font-semibold">{category}</p>
+      <div className="flex flex-col justify-between space-y-5">
 
-          <p className="border-t border-gray-300 pt-3 text-gray-800">
-            <span className="font-bold">Review: </span>
+        <div className="space-y-3">
+            <h3 className='border border-gray-700 w-fit px-2 rounded-full font-semibold text-white'>{bookId}</h3>
+          <h2 className="text-3xl  font-bold text-white">
+            {bookName}
+          </h2>
+
+          <p className="text-gray-400 font-medium">
+            By {author}
+          </p>
+
+          <p className="text-sm font-semibold text-green-400">
+            Category: {category}
+          </p>
+
+          <p className="text-gray-400">
+            <span className="font-semibold text-white">Review: </span>
             {review}
           </p>
 
           {/* Tags */}
-          <div className="flex flex-wrap items-center gap-3 mt-2">
-            <span className="font-bold">Tags:</span>
+          <div className="flex flex-wrap gap-2">
             {tags.map((tag, index) => (
               <span
                 key={index}
-                className="badge bg-green-100 text-green-700 font-semibold text-sm"
+                className="badge bg-green-100 text-green-700 text-xs font-semibold"
               >
                 #{tag}
               </span>
@@ -65,40 +85,50 @@ const BookDetails = () => {
           </div>
 
           {/* Book Info */}
-          <div className="border-t border-gray-300 pt-4 space-y-2 text-gray-700">
+          <div className="grid grid-cols-2 gap-3 text-sm text-gray-700 pt-3 border-t">
+
             <p>
-              <span className="font-bold">Number of Pages: </span>
-              <span className="font-medium">{totalPages}</span>
+              <span className="font-semibold text-white">Pages:</span> <span className='text-gray-300'>
+                {totalPages}
+              </span>
             </p>
+
             <p>
-              <span className="font-bold">Publisher: </span>
-              <span className="font-medium">{publisher}</span>
+              <span className="font-semibold text-white">Rating:</span> <span className='text-gray-300'>
+                {rating}
+              </span>
             </p>
+
             <p>
-              <span className="font-bold">Year of Publishing: </span>
-              <span className="font-medium">{yearOfPublishing}</span>
+              <span className="font-semibold text-white">Publisher:</span> <span className='text-gray-300'>
+                {publisher}
+              </span>
             </p>
+
             <p>
-              <span className="font-bold">Rating: </span>
-              <span className="font-medium">{rating} / 5</span>
+              <span className="font-semibold text-white">Year:</span> <span className='text-gray-300'>{yearOfPublishing}</span>
             </p>
+
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="mt-6 flex flex-wrap gap-4">
+        {/* Buttons */}
+        <div className="flex gap-4 pt-4">
+
           <button
             onClick={() => handleMarkAsRead(expectedBook)}
-            className="btn btn-success flex-1"
+            className="btn bg-green-500 border-none hover:bg-green-700 text-white flex-1"
           >
             Mark as Read
           </button>
+
           <button
             onClick={() => handleWishList(expectedBook)}
-            className="btn btn-info text-white flex-1"
+            className="btn bg-blue-500 border-none hover:bg-blue-700 text-white flex-1"
           >
             Add to Wishlist
           </button>
+
         </div>
       </div>
     </div>

@@ -14,14 +14,14 @@ const AllBooks = () => {
 
     return (
         <div className='my-10 container mx-auto grid'>
-            <h1 className='font-bold text-4xl text-center'>Books</h1>
+            <h1 className='font-bold text-4xl text-center'>Explore the World of Bestselling Books</h1>
+            <p className='text-center flex justify-center my-3 font-semibold text-gray-500'>Stay up to date with what’s popular and discover the perfect book for your next read.</p>
 
-   <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-10 gap-6 '>
+   <div className='grid sm:grid-cols-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 my-10 gap-6 '>
     
          {books.map((book,id)=>{
                 return <BookCard key={id} book={book}></BookCard>
-
-                
+    
             })}
    </div>
 
